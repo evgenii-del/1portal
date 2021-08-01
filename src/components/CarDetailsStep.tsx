@@ -1,11 +1,28 @@
 import React, { FC } from "react";
 import CustomTextInput from "./CustomTextInput";
 import StepperButtons from "./StepperButtons";
+import StepperProcess from "./StepperProcess";
+import CarTaxiConfirmation from "./CarTaxiConfirmation";
 
-const CarDetailsStep: FC = (): JSX.Element => {
+interface CarDetailsStepProp {
+  nextStep: (step: number) => void;
+  prevStep: (step: number) => void;
+}
+
+const CarDetailsStep: FC<CarDetailsStepProp> = (
+  props: CarDetailsStepProp
+): JSX.Element => {
+  const handleNextStep = (): void => {
+    props.nextStep(2);
+  };
+
+  const handlePrevStep = (): void => {
+    props.prevStep(1);
+  };
   return (
     <div className="car-details">
       <h1 className="car-details__title">Данные для расчета</h1>
+      <StepperProcess />
       <div className="car-details__car-data">
         <h2 className="car-details__car-data-title">Данные автомобиля</h2>
         <div className="car-details__car-data-container">
@@ -20,13 +37,7 @@ const CarDetailsStep: FC = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <div className="car-details__taxi-confirmation">
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="">
-          <input type="checkbox" />
-          <span>Авто не используется в такси</span>
-        </label>
-      </div>
+      <CarTaxiConfirmation />
       <div className="car-details__period">
         <h2 className="car-details__period-title">Период действия полиса</h2>
         <div className="car-details__period-container">
@@ -34,7 +45,10 @@ const CarDetailsStep: FC = (): JSX.Element => {
           <CustomTextInput />
         </div>
       </div>
-      <StepperButtons />
+      <StepperButtons
+        handleNextStep={handleNextStep}
+        handlePrevStep={handlePrevStep}
+      />
     </div>
   );
 };

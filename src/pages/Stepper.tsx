@@ -3,7 +3,7 @@ import CarDetailsStep from "../components/CarDetailsStep";
 import CarNumberStep from "../components/CarNumberStep";
 
 const Stepper: FC = (): JSX.Element => {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const nextStep = (step: number): void => {
     setCurrentStep(step);
@@ -15,9 +15,9 @@ const Stepper: FC = (): JSX.Element => {
 
   switch (currentStep) {
     case 1:
-      return <CarNumberStep />;
+      return <CarNumberStep nextStep={nextStep} />;
     case 2:
-      return <CarDetailsStep />;
+      return <CarDetailsStep nextStep={nextStep} prevStep={prevStep} />;
     default:
       return <div>default</div>;
   }

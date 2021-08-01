@@ -2,9 +2,11 @@
   padding: 70px 0;
 
   &__title {
-    color: #3c3e44;
     text-align: center;
-    margin-bottom: 50px;
+    font-size: 40px;
+    letter-spacing: -0.23px;
+    line-height: 45px;
+    color: #3c3e44;
   }
 
   &__container {
@@ -14,14 +16,14 @@
     width: 100%;
   }
 
-  &__row {
+  &__container-row {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 1em;
     margin-bottom: 30px;
   }
 
-  &__description {
+  &__container-description {
     color: #8c8c8c;
     display: block;
     font-size: 14px;
@@ -29,10 +31,10 @@
     margin-bottom: 20px;
   }
 
-  &__input {
+  &__container-input {
     height: 60px;
     line-height: 24px;
-    padding: 25px 15px 9px;
+    padding: 15px;
     font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: #3c3e44;
     background: #fff;
@@ -48,20 +50,15 @@
     cursor: pointer;
   }
 
-  &__button {
+  &__container-button {
     background-color: #0dd149;
     color: #fff;
     font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     align-items: center;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     height: 60px;
     justify-content: center;
     padding: 0;
-    position: relative;
-    text-transform: capitalize;
     font-size: 18px;
     line-height: 1.55;
     text-decoration: none;
@@ -72,7 +69,7 @@
     cursor: pointer;
   }
 
-  &__link {
+  &__container-link {
     color: #00afff;
     cursor: pointer;
     font-size: 14px;

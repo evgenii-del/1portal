@@ -1,0 +1,41 @@
+.stepper-process {
+  &__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 30px 0;
+  }
+
+  &__list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & + .stepper-process__list-item {
+      padding-left: 30px;
+    }
+  }
+
+  &__list-item-text {
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #8c8c8c;
+    cursor: default;
+  }
+
+  &__list-item-icon {
+    transform: rotate(180deg);
+    margin-left: 30px;
+  }
+
+  &__list-item_active {
+    .stepper-process__list-item-text {
+      color: #3c3e44;
+    }
+
+    .stepper-process__list-item-icon {
+      stroke: #3c3e44;
+    }
+  }
+}
