@@ -3,7 +3,7 @@ import CarDetailsStep from "../components/CarDetailsStep";
 import CarNumberStep from "../components/CarNumberStep";
 
 const Stepper: FC = (): JSX.Element => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(2);
 
   const nextStep = (step: number): void => {
     setCurrentStep(step);
