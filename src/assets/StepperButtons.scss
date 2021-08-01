@@ -1,0 +1,34 @@
+.stepper-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+
+  &__back,
+  &__continue {
+    width: 100%;
+    max-width: calc(100% / 3);
+    padding: 0 10px;
+    text-align: center;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    height: 44px;
+    line-height: 42px;
+    font-size: 14px;
+    border: 1px solid;
+  }
+
+  &__back {
+    background-color: #fff;
+    border-color: #cecece;
+    color: #3c3e44;
+  }
+
+  &__continue {
+    background-color: #0dd149;
+    border-color: #0dd149;
+    color: #fff;
+  }
+}
