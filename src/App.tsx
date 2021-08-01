@@ -1,11 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC } from "react";
 
 const App: FC = () => {
-  return (
-    <div>
-      1portal
-    </div>
-  )
-}
+  return <div>1portal</div>;
+};
 
-export default App
+export default App;
