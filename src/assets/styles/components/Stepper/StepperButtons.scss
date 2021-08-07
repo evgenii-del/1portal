@@ -1,12 +1,12 @@
 .stepper-buttons {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 1em;
   margin-top: 50px;
 
   &__back,
   &__continue {
     width: 100%;
-    max-width: calc(100% / 3);
     padding: 0 10px;
     text-align: center;
     border-radius: 4px;
@@ -27,6 +27,7 @@
   }
 
   &__continue {
+    grid-column-start: 3;
     background-color: #0dd149;
     border-color: #0dd149;
     color: #fff;
