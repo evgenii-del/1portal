@@ -25,7 +25,7 @@ const Stepper: FC = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className="stepper">
       <StepperProcess />
       <StepperContent
         currentStep={currentStep}
