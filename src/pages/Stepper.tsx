@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
-import CarDetailsStep from "../components/CarDetailsStep";
-import CarNumberStep from "../components/CarNumberStep";
+import StepperContent from "../components/Stepper/StepperContent";
+import StepperButtons from "../components/Stepper/StepperButtons";
+import StepperProcess from "../components/Stepper/StepperProcess";
 
 const Stepper: FC = (): JSX.Element => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -13,14 +14,29 @@ const Stepper: FC = (): JSX.Element => {
     setCurrentStep(step);
   };
 
-  switch (currentStep) {
-    case 1:
-      return <CarNumberStep nextStep={nextStep} />;
-    case 2:
-      return <CarDetailsStep nextStep={nextStep} prevStep={prevStep} />;
-    default:
-      return <div>default</div>;
-  }
+  const handleNextStep = (): void => {
+    nextStep(2);
+  };
+
+  const handlePrevStep = (): void => {
+    prevStep(1);
+  };
+
+  return (
+    <div>
+      <StepperProcess />
+      <StepperContent
+        currentStep={currentStep}
+        handleNextStep={handleNextStep}
+      />
+      {currentStep !== 1 && (
+        <StepperButtons
+          handleNextStep={handleNextStep}
+          handlePrevStep={handlePrevStep}
+        />
+      )}
+    </div>
+  );
 };
 
 export default Stepper;

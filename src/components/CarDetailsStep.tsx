@@ -1,28 +1,10 @@
 import React, { FC } from "react";
 import CustomTextInput from "./CustomTextInput";
-import StepperButtons from "./StepperButtons";
-import StepperProcess from "./StepperProcess";
 import CarTaxiConfirmation from "./CarTaxiConfirmation";
 
-interface CarDetailsStepProp {
-  nextStep: (step: number) => void;
-  prevStep: (step: number) => void;
-}
-
-const CarDetailsStep: FC<CarDetailsStepProp> = (
-  props: CarDetailsStepProp
-): JSX.Element => {
-  const handleNextStep = (): void => {
-    props.nextStep(2);
-  };
-
-  const handlePrevStep = (): void => {
-    props.prevStep(1);
-  };
+const CarDetailsStep: FC = (): JSX.Element => {
   return (
-    <div className="car-details">
-      <h1 className="car-details__title">Данные для расчета</h1>
-      <StepperProcess />
+    <>
       <div className="car-details__car-data">
         <h2 className="car-details__car-data-title">Данные автомобиля</h2>
         <div className="car-details__car-data-container">
@@ -45,11 +27,7 @@ const CarDetailsStep: FC<CarDetailsStepProp> = (
           <CustomTextInput />
         </div>
       </div>
-      <StepperButtons
-        handleNextStep={handleNextStep}
-        handlePrevStep={handlePrevStep}
-      />
-    </div>
+    </>
   );
 };
 

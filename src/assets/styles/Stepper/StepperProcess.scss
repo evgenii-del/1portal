@@ -1,4 +1,12 @@
 .stepper-process {
+  &__title {
+    text-align: center;
+    font-size: 40px;
+    letter-spacing: -0.23px;
+    line-height: 45px;
+    color: #3c3e44;
+  }
+
   &__list {
     display: flex;
     justify-content: center;
