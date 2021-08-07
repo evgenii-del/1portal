@@ -7,19 +7,21 @@ const Stepper: FC = (): JSX.Element => {
   const [currentStep, setCurrentStep] = useState(1);
 
   const nextStep = (step: number): void => {
-    setCurrentStep(step);
+    const newStep = step + 1;
+    setCurrentStep(newStep);
   };
 
   const prevStep = (step: number): void => {
-    setCurrentStep(step);
+    const newStep = step - 1;
+    setCurrentStep(newStep);
   };
 
   const handleNextStep = (): void => {
-    nextStep(2);
+    nextStep(currentStep);
   };
 
   const handlePrevStep = (): void => {
-    prevStep(1);
+    prevStep(currentStep);
   };
 
   return (

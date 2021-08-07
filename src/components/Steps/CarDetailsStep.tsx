@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import CustomTextInput from "./CustomTextInput";
-import CarTaxiConfirmation from "./CarTaxiConfirmation";
+import CustomTextInput from "../Common/CustomTextInput";
+import CarTaxiConfirmation from "../CarTaxiConfirmation";
 
 const CarDetailsStep: FC = (): JSX.Element => {
   return (

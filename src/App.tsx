@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Stepper from "./pages/Stepper";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/Common/Header";
+import Footer from "./components/Common/Footer";
 
 const App: FC = () => {
   return (

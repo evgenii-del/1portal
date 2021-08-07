@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-import CarNumberStep from "../CarNumberStep";
-import CarDetailsStep from "../CarDetailsStep";
+import CarNumberStep from "../Steps/CarNumberStep";
+import CarDetailsStep from "../Steps/CarDetailsStep";
+import CustomerDetailsStep from "../Steps/CustomerDetailsStep";
 
 interface StepperContentProp {
   currentStep: number;
@@ -15,6 +16,8 @@ const StepperContent: FC<StepperContentProp> = (
       return <CarNumberStep handleNextStep={props.handleNextStep} />;
     case 2:
       return <CarDetailsStep />;
+    case 3:
+      return <CustomerDetailsStep />;
     default:
       return <div>default</div>;
   }
