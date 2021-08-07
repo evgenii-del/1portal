@@ -11,8 +11,7 @@
     margin-bottom: 20px;
   }
 
-  &__car-data-row:nth-child(1),
-  &__car-data-row:nth-child(2),
+  &__car-data-row,
   &__period-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
