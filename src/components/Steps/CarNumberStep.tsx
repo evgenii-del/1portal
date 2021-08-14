@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 
 interface CarNumberStepProp {
   handleNextStep(): void;
@@ -7,6 +7,12 @@ interface CarNumberStepProp {
 const CarNumberStep: FC<CarNumberStepProp> = ({
   handleNextStep,
 }: CarNumberStepProp): JSX.Element => {
+  const [carNumber, onCarNumber] = useState("");
+
+  const handleCarNumberChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    onCarNumber(target.value);
+  };
+
   return (
     <div className="car-number__container">
       <p className="car-number__container-description">
@@ -17,6 +23,8 @@ const CarNumberStep: FC<CarNumberStepProp> = ({
           className="car-number__container-input"
           type="text"
           placeholder="Введите гос. номер"
+          value={carNumber}
+          onChange={handleCarNumberChange}
         />
         <button
           className="car-number__container-button"
