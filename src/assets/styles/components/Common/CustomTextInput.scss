@@ -6,6 +6,10 @@
     line-height: 1;
     text-align: left;
     color: #8c8c8c;
+
+    &_error {
+      color: #c11d1d;
+    }
   }
 
   &__input {
@@ -25,5 +29,19 @@
     text-overflow: ellipsis;
     outline: none;
     appearance: none;
+
+    &:hover,
+    &:focus {
+      border-color: rgba(13, 209, 73, 0.5);
+    }
+
+    &_error {
+      border-color: #c11d1d;
+
+      &:hover,
+      &:focus {
+        border-color: #c11d1d;
+      }
+    }
   }
 }

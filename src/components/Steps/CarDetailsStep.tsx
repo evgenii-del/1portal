@@ -9,7 +9,10 @@ const CarDetailsStep: FC = (): JSX.Element => {
         <h2 className="car-details__car-data-title">Данные автомобиля</h2>
         <div className="car-details__car-data-container">
           <div className="car-details__car-data-row">
-            <CustomTextInput />
+            <CustomTextInput
+              label="test label"
+              placeholder="test placeholder"
+            />
             <CustomTextInput />
           </div>
           <div className="car-details__car-data-row">
