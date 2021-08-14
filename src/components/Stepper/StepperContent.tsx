@@ -3,15 +3,20 @@ import CarNumberStep from "../Steps/CarNumberStep";
 import CarDetailsStep from "../Steps/CarDetailsStep";
 import CustomerDetailsStep from "../Steps/CustomerDetailsStep";
 
+interface StepInterface {
+  title: string;
+  id: number;
+}
+
 interface StepperContentProp {
-  currentStep: number;
+  currentStep: StepInterface;
   handleNextStep(): void;
 }
 
 const StepperContent: FC<StepperContentProp> = (
   props: StepperContentProp
 ): JSX.Element => {
-  switch (props.currentStep) {
+  switch (props.currentStep.id) {
     case 1:
       return <CarNumberStep handleNextStep={props.handleNextStep} />;
     case 2:

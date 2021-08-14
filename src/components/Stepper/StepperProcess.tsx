@@ -1,9 +1,20 @@
 import React, { FC } from "react";
 
-const StepperProcess: FC = (): JSX.Element => {
+interface StepInterface {
+  title: string;
+  id: number;
+}
+
+interface StepperProcessInterface {
+  currentStep: StepInterface;
+}
+
+const StepperProcess: FC<StepperProcessInterface> = ({
+  currentStep,
+}: StepperProcessInterface): JSX.Element => {
   return (
     <div className="stepper-process">
-      <h1 className="stepper-process__title">Данные для расчета</h1>
+      <h1 className="stepper-process__title">{currentStep.title}</h1>
       <div className="stepper-process__list">
         <div className="stepper-process__list-item stepper-process__list-item_active">
           <span className="stepper-process__list-item-text">Первый</span>
