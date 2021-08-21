@@ -59,6 +59,13 @@
     border-radius: 4px;
     outline: none;
     cursor: pointer;
+
+    &:disabled {
+      background-color: #cecece;
+      border-color: #cecece;
+      color: #3c3e44;
+      cursor: default;
+    }
   }
 
   &__container-link {

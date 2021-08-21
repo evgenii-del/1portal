@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, useState } from "react";
+import Loader from "../Common/Loader";
 
 interface CarNumberStepProp {
   handleNextStep(): void;
@@ -7,7 +8,16 @@ interface CarNumberStepProp {
 const CarNumberStep: FC<CarNumberStepProp> = ({
   handleNextStep,
 }: CarNumberStepProp): JSX.Element => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [carNumber, onCarNumber] = useState("");
+
+  const goNextPage = () => {
+    setIsLoaded(true);
+    setTimeout(() => {
+      setIsLoaded(false);
+      handleNextStep();
+    }, 3000);
+  };
 
   const handleCarNumberChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     onCarNumber(target.value);
@@ -29,9 +39,10 @@ const CarNumberStep: FC<CarNumberStepProp> = ({
         <button
           className="car-number__container-button"
           type="button"
-          onClick={handleNextStep}
+          onClick={goNextPage}
+          disabled={isLoaded}
         >
-          Продолжить
+          {isLoaded ? <Loader /> : "Продолжить"}
         </button>
       </div>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */}
