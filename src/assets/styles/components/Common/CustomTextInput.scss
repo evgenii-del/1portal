@@ -1,4 +1,6 @@
 .custom-text-input {
+  position: relative;
+
   &__label {
     display: block;
     margin-bottom: 10px;
@@ -43,5 +45,15 @@
         border-color: #c11d1d;
       }
     }
+  }
+
+  &__error-message {
+    position: absolute;
+    bottom: -15px;
+    width: auto;
+    height: 12px;
+    font-size: 12px;
+    line-height: 1;
+    color: #c11d1d;
   }
 }
