@@ -22,7 +22,7 @@ const CustomSelect: FC<CustomSelectProp> = ({
 }: CustomSelectProp): JSX.Element => {
   return (
     <div className="custom-text-input">
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control,jsx-a11y/label-has-for */}
       <label className="custom-text-input__label">{label}</label>
       <div>
         <select

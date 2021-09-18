@@ -40,8 +40,8 @@ const CarDetailsStep: FC = (): JSX.Element => {
     setBodyNumber(e.target.value);
   };
 
-  const handleStartDate = (e: ChangeEvent<HTMLSelectElement>) => {
-    setStartDate(+e.target.value);
+  const handleStartDate = (e: ChangeEvent<any>) => {
+    setStartDate(e.target.value);
   };
 
   return (
@@ -96,12 +96,20 @@ const CarDetailsStep: FC = (): JSX.Element => {
             onChange={() => {}}
             disabled
           />
-          <CustomSelect
-            label="Дата початку дії поліса: Джерело"
-            selectedOption={startDate}
-            options={years}
-            onChange={handleStartDate}
-          />
+          <div className="custom-text-input">
+            <label className="custom-text-input__label" htmlFor="startDate">
+              Дата початку дії поліса: Джерело
+            </label>
+            <div>
+              <input
+                className="custom-text-input__input"
+                type="date"
+                id="startDate"
+                value={startDate}
+                onChange={handleStartDate}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>
