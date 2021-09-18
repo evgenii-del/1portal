@@ -28,8 +28,10 @@
   }
 
   &__label {
-    padding-left: 20px;
+    padding-left: 24px;
     color: #3c3e44;
+
+    user-select: none;
 
     &:before {
       position: absolute;

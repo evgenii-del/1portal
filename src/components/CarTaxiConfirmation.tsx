@@ -12,7 +12,7 @@ const CarTaxiConfirmation: FC = (): JSX.Element => {
         />
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label className="checkbox__label" htmlFor="checkbox_1">
-          Ты согласен?
+          Автомобіль не використовується у таксі
         </label>
       </div>
     </div>

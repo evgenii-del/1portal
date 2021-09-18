@@ -1,21 +1,47 @@
-import React, { FC, useState } from "react";
-// eslint-disable-next-line import/no-named-as-default,import/no-named-as-default-member
+import React, { ChangeEvent, FC, useState } from "react";
 import CustomTextInput from "../Common/CustomTextInput";
 import CarTaxiConfirmation from "../CarTaxiConfirmation";
+import CustomSelect from "../Common/CustomSelect";
+
+const years = [
+  { label: "1", value: 1 },
+  { label: "2", value: 2 },
+];
+const insuranceTypeArr = [{ label: "1 рік", value: 1 }];
+const makeArr = [{ label: "1", value: 1 }];
+const modelArr = [{ label: "1", value: 1 }];
 
 const CarDetailsStep: FC = (): JSX.Element => {
-  const [email, setEmail] = useState("email");
-  const [emailError, setEmailError] = useState("Ошибочка");
+  const [stateNumber, setStateNumber] = useState("");
+  const [selectedYear, setSelectedYear] = useState(0);
+  const [make, setMake] = useState(0);
+  const [model, setModel] = useState(0);
+  const [bodyNumber, setBodyNumber] = useState("");
+  const insuranceType = 1;
+  const [startDate, setStartDate] = useState(0);
 
-  const emailHandler = (e: any) => {
-    setEmail(e.target.value);
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(email).toLowerCase())) {
-      setEmailError("Ошибочка");
-    } else {
-      setEmailError("");
-    }
+  const handleStateNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    setStateNumber(e.target.value);
+  };
+
+  const handleSelectedYear = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedYear(+e.target.value);
+  };
+
+  const handleMake = (e: ChangeEvent<HTMLSelectElement>) => {
+    setMake(+e.target.value);
+  };
+
+  const handleModel = (e: ChangeEvent<HTMLSelectElement>) => {
+    setModel(+e.target.value);
+  };
+
+  const handleBodyNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    setBodyNumber(e.target.value);
+  };
+
+  const handleStartDate = (e: ChangeEvent<HTMLSelectElement>) => {
+    setStartDate(+e.target.value);
   };
 
   return (
@@ -25,18 +51,37 @@ const CarDetailsStep: FC = (): JSX.Element => {
         <div className="car-details__car-data-container">
           <div className="car-details__car-data-row">
             <CustomTextInput
-              label="test label"
-              placeholder="test placeholder"
-              value={email}
-              errorMessage={emailError}
-              onChange={emailHandler}
+              label="Державний номер"
+              placeholder="Державний номер"
+              value={stateNumber}
+              onChange={handleStateNumber}
             />
-            <CustomTextInput />
+            <CustomSelect
+              label="Рік випуску"
+              selectedOption={selectedYear}
+              options={years}
+              onChange={handleSelectedYear}
+            />
           </div>
           <div className="car-details__car-data-row">
-            <CustomTextInput />
-            <CustomTextInput />
-            <CustomTextInput />
+            <CustomSelect
+              label="Марка"
+              selectedOption={make}
+              options={makeArr}
+              onChange={handleMake}
+            />
+            <CustomSelect
+              label="Модель"
+              selectedOption={model}
+              options={modelArr}
+              onChange={handleModel}
+            />
+            <CustomTextInput
+              label="Номер кузова"
+              placeholder="Номер кузова"
+              value={bodyNumber}
+              onChange={handleBodyNumber}
+            />
           </div>
         </div>
       </div>
@@ -44,8 +89,19 @@ const CarDetailsStep: FC = (): JSX.Element => {
       <div className="car-details__period">
         <h2 className="car-details__period-title">Период действия полиса</h2>
         <div className="car-details__period-container">
-          <CustomTextInput />
-          <CustomTextInput />
+          <CustomSelect
+            label="Тип страхування"
+            options={insuranceTypeArr}
+            selectedOption={insuranceType}
+            onChange={() => {}}
+            disabled
+          />
+          <CustomSelect
+            label="Дата початку дії поліса: Джерело"
+            selectedOption={startDate}
+            options={years}
+            onChange={handleStartDate}
+          />
         </div>
       </div>
     </>

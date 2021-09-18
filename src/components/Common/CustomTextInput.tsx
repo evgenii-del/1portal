@@ -1,18 +1,16 @@
-import React, { FC, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 
 interface CustomTextInputInterface {
   placeholder?: string;
   label?: string;
   value?: string;
   errorMessage?: string;
-
-  // eslint-disable-next-line react/require-default-props
-  onChange?(e: any): void;
+  onChange(e: ChangeEvent<HTMLInputElement>): void;
 }
 
 const CustomTextInput: FC<CustomTextInputInterface> = ({
-  placeholder,
   label,
+  placeholder,
   value,
   onChange,
   errorMessage,
