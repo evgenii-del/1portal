@@ -2,6 +2,10 @@ import React, { ChangeEvent, FC, useState } from "react";
 import CustomTextInput from "../Common/CustomTextInput";
 import CustomSelect from "../Common/CustomSelect";
 import CustomTextMask from "../Common/CustomTextMask";
+import {
+  seriesAndNumberDriverValidation,
+  seriesAndNumberPassportValidation,
+} from "../../utils/validations";
 
 const documentOptions = [
   { value: 1, label: "Passport" },
@@ -78,11 +82,17 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleSeriesAndNumberPassport = (e: ChangeEvent<HTMLInputElement>) => {
-    setSeriesAndNumberPassport(e.target.value.toUpperCase());
+    const value = e.target.value.toUpperCase();
+    if (seriesAndNumberPassportValidation(value)) {
+      setSeriesAndNumberPassport(value);
+    }
   };
 
   const handleSeriesAndNumberDriver = (e: ChangeEvent<HTMLInputElement>) => {
-    setSeriesAndNumberDriver(e.target.value.toUpperCase());
+    const value = e.target.value.toUpperCase();
+    if (seriesAndNumberDriverValidation(value)) {
+      setSeriesAndNumberDriver(value);
+    }
   };
 
   const handleIssueDate = (e: ChangeEvent<HTMLInputElement>) => {
