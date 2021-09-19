@@ -2,6 +2,7 @@ import React, { ChangeEvent, FC, useState } from "react";
 import CustomTextInput from "../Common/CustomTextInput";
 import CarTaxiConfirmation from "../CarTaxiConfirmation";
 import CustomSelect from "../Common/CustomSelect";
+import { stateNumberValidation } from "../../utils/validations";
 
 const years = [
   { label: "1", value: 1 },
@@ -21,7 +22,10 @@ const CarDetailsStep: FC = (): JSX.Element => {
   const [startDate, setStartDate] = useState(0);
 
   const handleStateNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    setStateNumber(e.target.value);
+    const value = e.target.value.toUpperCase();
+    if (stateNumberValidation(value)) {
+      setStateNumber(value);
+    }
   };
 
   const handleSelectedYear = (e: ChangeEvent<HTMLSelectElement>) => {

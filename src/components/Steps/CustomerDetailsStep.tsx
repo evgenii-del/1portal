@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import CustomTextInput from "../Common/CustomTextInput";
 import CustomSelect from "../Common/CustomSelect";
+import CustomTextMask from "../Common/CustomTextMask";
 
 const documentOptions = [
   { value: 1, label: "Passport" },
@@ -16,7 +17,7 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [parentName, setParentName] = useState("");
-  const [birthdayDate, setBirthdayDate] = useState(0);
+  const [birthdayDate, setBirthdayDate] = useState("");
   const [individualNumber, setIndividualNumber] = useState("");
   const [city, setCity] = useState(0);
   const [street, setStreet] = useState("");
@@ -24,7 +25,8 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   const [apartment, setApartment] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [seriesAndNumber, setSeriesAndNumber] = useState("");
+  const [seriesAndNumberPassport, setSeriesAndNumberPassport] = useState("");
+  const [seriesAndNumberDriver, setSeriesAndNumberDriver] = useState("");
   const [issueDate, setIssueDate] = useState("");
   const [issuedBy, setIssuedBy] = useState("");
   const [number, setNumber] = useState("");
@@ -43,8 +45,8 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
     setParentName(e.target.value);
   };
 
-  const handleBirthdayDate = (e: ChangeEvent<HTMLSelectElement>) => {
-    setBirthdayDate(+e.target.value);
+  const handleBirthdayDate = (e: ChangeEvent<HTMLInputElement>) => {
+    setBirthdayDate(e.target.value);
   };
 
   const handleIndividualNumber = (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,8 +77,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
     setEmail(e.target.value);
   };
 
-  const handleSeriesAndNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    setSeriesAndNumber(e.target.value);
+  const handleSeriesAndNumberPassport = (e: ChangeEvent<HTMLInputElement>) => {
+    setSeriesAndNumberPassport(e.target.value);
+  };
+
+  const handleSeriesAndNumberDriver = (e: ChangeEvent<HTMLInputElement>) => {
+    setSeriesAndNumberDriver(e.target.value);
   };
 
   const handleIssueDate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -134,11 +140,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
             />
           </div>
           <div className="customer-details__info-row">
-            <CustomSelect
+            <CustomTextMask
               label="Рік народження"
-              selectedOption={birthdayDate}
-              options={years}
+              placeholder="__.__.____"
+              value={birthdayDate}
               onChange={handleBirthdayDate}
+              mask="99.99.9999"
             />
             <CustomTextInput
               label="ІПН"
@@ -176,11 +183,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
             </div>
           </div>
           <div className="customer-details__info-row">
-            <CustomTextInput
+            <CustomTextMask
               label="Телефон"
-              placeholder="Телефон"
+              placeholder="+380 (__) ___-__-__"
               value={phone}
               onChange={handlePhone}
+              mask="+380 (99) 999-99-99"
             />
             <CustomTextInput
               label="Пошта (email)"
@@ -204,14 +212,15 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
               <CustomTextInput
                 label="Серія і номер"
                 placeholder="Серія і номер"
-                value={seriesAndNumber}
-                onChange={handleSeriesAndNumber}
+                value={seriesAndNumberPassport}
+                onChange={handleSeriesAndNumberPassport}
               />
-              <CustomTextInput
+              <CustomTextMask
                 label="Дата видачі"
-                placeholder="Дата видачі"
+                placeholder="__.__.____"
                 value={issueDate}
                 onChange={handleIssueDate}
+                mask="99.99.9999"
               />
             </div>
             <div className="customer-details__documents-row">
@@ -233,17 +242,19 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
                 selectedOption={selectedDocument}
                 onChange={handleChangeDocument}
               />
-              <CustomTextInput
+              <CustomTextMask
                 label="Номер"
-                placeholder="Номер"
+                placeholder="_________"
                 value={number}
                 onChange={handleNumber}
+                mask="999999999"
               />
-              <CustomTextInput
+              <CustomTextMask
                 label="Запис"
-                placeholder="Запис"
+                placeholder="________-_____"
                 value={record}
                 onChange={handleRecord}
+                mask="99999999-99999"
               />
             </div>
             <div className="customer-details__documents-row">
@@ -253,11 +264,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
                 value={issuedBy}
                 onChange={handleIssuedBy}
               />
-              <CustomTextInput
+              <CustomTextMask
                 label="Дата видачі"
-                placeholder="Дата видачі"
+                placeholder="__.__.____"
                 value={issueDate}
                 onChange={handleIssueDate}
+                mask="99.99.9999"
               />
             </div>
           </div>
@@ -274,14 +286,15 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
               <CustomTextInput
                 label="Серія і номер"
                 placeholder="Серія і номер"
-                value={seriesAndNumber}
-                onChange={handleSeriesAndNumber}
+                value={seriesAndNumberDriver}
+                onChange={handleSeriesAndNumberDriver}
               />
-              <CustomTextInput
+              <CustomTextMask
                 label="Дата видачі"
-                placeholder="Дата видачі"
+                placeholder="__.__.____"
                 value={issueDate}
                 onChange={handleIssueDate}
+                mask="99.99.9999"
               />
             </div>
             <div className="customer-details__documents-row">

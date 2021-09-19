@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import Loader from "../Common/Loader";
+import { stateNumberValidation } from "../../utils/validations";
 
 interface CarNumberStepProp {
   handleNextStep(): void;
@@ -9,7 +10,7 @@ const CarNumberStep: FC<CarNumberStepProp> = ({
   handleNextStep,
 }: CarNumberStepProp): JSX.Element => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [carNumber, onCarNumber] = useState("");
+  const [stateNumber, setStateNumber] = useState("");
 
   const goNextPage = () => {
     setIsLoaded(true);
@@ -19,8 +20,11 @@ const CarNumberStep: FC<CarNumberStepProp> = ({
     }, 3000);
   };
 
-  const handleCarNumberChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    onCarNumber(target.value);
+  const handleStateNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toUpperCase();
+    if (stateNumberValidation(value)) {
+      setStateNumber(value);
+    }
   };
 
   return (
@@ -33,8 +37,8 @@ const CarNumberStep: FC<CarNumberStepProp> = ({
           className="car-number__container-input"
           type="text"
           placeholder="Введите гос. номер"
-          value={carNumber}
-          onChange={handleCarNumberChange}
+          value={stateNumber}
+          onChange={handleStateNumber}
         />
         <button
           className="car-number__container-button"
