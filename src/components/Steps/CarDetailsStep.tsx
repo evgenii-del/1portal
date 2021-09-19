@@ -13,6 +13,7 @@ const modelArr = [{ label: "1", value: 1 }];
 
 const CarDetailsStep: FC = (): JSX.Element => {
   const [stateNumber, setStateNumber] = useState("");
+  const [stateNumberError, setStateNumberError] = useState("");
   const [selectedYear, setSelectedYear] = useState(0);
   const [make, setMake] = useState(0);
   const [model, setModel] = useState(0);
@@ -20,8 +21,24 @@ const CarDetailsStep: FC = (): JSX.Element => {
   const insuranceType = 1;
   const [startDate, setStartDate] = useState(0);
 
+  const isStateNumberValid = (carNumber: string) => {
+    return (
+      new RegExp(
+        /(^([A-Z]){2}([0-9]){4}([A-Z]){2}$)|(^([0-9]){6}([A-Z]){2}$)/
+      ).test(carNumber) ||
+      new RegExp(
+        /(^([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}([0-9]){4}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)|(^([0-9]){6}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)/
+      ).test(carNumber)
+    );
+  };
+
   const handleStateNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setStateNumber(e.target.value);
+    if (!isStateNumberValid(e.target.value)) {
+      setStateNumberError("В форматі XX0000XX або 000000XX");
+    } else {
+      setStateNumberError("");
+    }
   };
 
   const handleSelectedYear = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -55,6 +72,7 @@ const CarDetailsStep: FC = (): JSX.Element => {
               placeholder="Державний номер"
               value={stateNumber}
               onChange={handleStateNumber}
+              errorMessage={stateNumberError}
             />
             <CustomSelect
               label="Рік випуску"
