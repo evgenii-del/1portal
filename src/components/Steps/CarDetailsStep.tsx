@@ -3,6 +3,7 @@ import CustomTextInput from "../Common/CustomTextInput";
 import CarTaxiConfirmation from "../CarTaxiConfirmation";
 import CustomSelect from "../Common/CustomSelect";
 import { stateNumberValidation } from "../../utils/validations";
+import CustomTextMask from "../Common/CustomTextMask";
 
 const years = [
   { label: "1", value: 1 },

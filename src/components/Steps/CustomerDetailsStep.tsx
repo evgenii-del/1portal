@@ -78,11 +78,11 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleSeriesAndNumberPassport = (e: ChangeEvent<HTMLInputElement>) => {
-    setSeriesAndNumberPassport(e.target.value);
+    setSeriesAndNumberPassport(e.target.value.toUpperCase());
   };
 
   const handleSeriesAndNumberDriver = (e: ChangeEvent<HTMLInputElement>) => {
-    setSeriesAndNumberDriver(e.target.value);
+    setSeriesAndNumberDriver(e.target.value.toUpperCase());
   };
 
   const handleIssueDate = (e: ChangeEvent<HTMLInputElement>) => {

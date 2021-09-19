@@ -1,7 +1,7 @@
-export const letterCheck = (symbol: string): boolean =>
-  new RegExp(/^[ABKEHIXPOCMTАВКЕНІХРОСМТ]$/).test(symbol);
+export const isLetter = (symbol: string): boolean =>
+  Number.isNaN(Number(symbol));
 
-export const numberCheck = (symbol: string): boolean =>
+const numberCheck = (symbol: string): boolean =>
   new RegExp(/^[0-9]$/).test(symbol);
 
 export const stateNumberValidation = (str: string): boolean => {
@@ -9,30 +9,24 @@ export const stateNumberValidation = (str: string): boolean => {
   const position = str.length;
 
   switch (position) {
-    case 0: {
+    case 0:
       return true;
-    }
-    case 1: {
-      return letterCheck(currentSymbol) || numberCheck(currentSymbol);
-    }
-    case 2: {
+    case 1:
+      return isLetter(currentSymbol) || numberCheck(currentSymbol);
+    case 2:
       return (
         (numberCheck(str[0]) && numberCheck(currentSymbol)) ||
-        (letterCheck(str[0]) && letterCheck(currentSymbol))
+        (isLetter(str[0]) && isLetter(currentSymbol))
       );
-    }
     case 3:
     case 4:
     case 5:
-    case 6: {
+    case 6:
       return numberCheck(currentSymbol);
-    }
     case 7:
-    case 8: {
-      return letterCheck(currentSymbol);
-    }
-    default: {
+    case 8:
+      return isLetter(currentSymbol);
+    default:
       return false;
-    }
   }
 };
