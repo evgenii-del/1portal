@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const isLetter = (symbol: string): boolean =>
   Number.isNaN(Number(symbol));
 
@@ -78,4 +80,19 @@ export const seriesAndNumberDriverValidation = (str: string): boolean => {
     default:
       return false;
   }
+};
+
+export const mandatoryValidation = (value: string): boolean => {
+  if (value && value.length !== 0) {
+    return true;
+  }
+  return false;
+};
+
+export const dateValidation = (dateStr: any): boolean => {
+  if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dateStr)) {
+    return false;
+  }
+  const date = moment(dateStr, "DD.MM.YYYY");
+  return date.isValid() && date.year() >= 1930;
 };

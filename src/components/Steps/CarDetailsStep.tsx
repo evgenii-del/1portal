@@ -3,7 +3,6 @@ import CustomTextInput from "../Common/CustomTextInput";
 import CarTaxiConfirmation from "../CarTaxiConfirmation";
 import CustomSelect from "../Common/CustomSelect";
 import { stateNumberValidation } from "../../utils/validations";
-import CustomTextMask from "../Common/CustomTextMask";
 
 const years = [
   { label: "1", value: 1 },
@@ -15,17 +14,35 @@ const modelArr = [{ label: "1", value: 1 }];
 
 const CarDetailsStep: FC = (): JSX.Element => {
   const [stateNumber, setStateNumber] = useState("");
+  const [stateNumberError, setStateNumberError] = useState("");
   const [selectedYear, setSelectedYear] = useState(0);
   const [make, setMake] = useState(0);
   const [model, setModel] = useState(0);
   const [bodyNumber, setBodyNumber] = useState("");
+  const [bodyNumberError, setBodyNumberError] = useState("");
   const insuranceType = 1;
   const [startDate, setStartDate] = useState(0);
+
+  const isStateNumberValid = (carNumber: string) => {
+    return (
+      new RegExp(
+        /(^([A-Z]){2}([0-9]){4}([A-Z]){2}$)|(^([0-9]){6}([A-Z]){2}$)/
+      ).test(carNumber) ||
+      new RegExp(
+        /(^([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}([0-9]){4}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)|(^([0-9]){6}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)/
+      ).test(carNumber)
+    );
+  };
 
   const handleStateNumber = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toUpperCase();
     if (stateNumberValidation(value)) {
       setStateNumber(value);
+      if (!isStateNumberValid(value)) {
+        setStateNumberError("В форматі XX0000XX або 000000XX");
+      } else {
+        setStateNumberError("");
+      }
     }
   };
 
@@ -43,6 +60,11 @@ const CarDetailsStep: FC = (): JSX.Element => {
 
   const handleBodyNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setBodyNumber(e.target.value);
+    if (!new RegExp("^[A-Z\\d]{5,17}$").test(e.target.value)) {
+      setBodyNumberError("Поле має містити лише цифри та латинські літери");
+    } else {
+      setBodyNumberError("");
+    }
   };
 
   const handleStartDate = (e: ChangeEvent<any>) => {
@@ -60,6 +82,7 @@ const CarDetailsStep: FC = (): JSX.Element => {
               placeholder="Державний номер"
               value={stateNumber}
               onChange={handleStateNumber}
+              errorMessage={stateNumberError}
             />
             <CustomSelect
               label="Рік випуску"
@@ -86,6 +109,7 @@ const CarDetailsStep: FC = (): JSX.Element => {
               placeholder="Номер кузова"
               value={bodyNumber}
               onChange={handleBodyNumber}
+              errorMessage={bodyNumberError}
             />
           </div>
         </div>
