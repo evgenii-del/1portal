@@ -82,14 +82,10 @@ export const seriesAndNumberDriverValidation = (str: string): boolean => {
   }
 };
 
-export const mandatoryValidation = (value: string): boolean => {
-  if (value && value.length !== 0) {
-    return true;
-  }
-  return false;
-};
+export const mandatoryValidation = (value: string): boolean =>
+  !!(value && value.length !== 0);
 
-export const dateValidation = (dateStr: any): boolean => {
+export const dateValidation = (dateStr: string): boolean => {
   if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dateStr)) {
     return false;
   }

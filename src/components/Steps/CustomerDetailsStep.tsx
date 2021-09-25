@@ -10,9 +10,9 @@ import {
 } from "../../utils/validations";
 
 const documentOptions = [
-  { value: 1, label: "Passport" },
-  { value: 2, label: "ID Card" },
-  { value: 3, label: "Driver license" },
+  { value: 1, label: "Паспорт" },
+  { value: 2, label: "ID Картка" },
+  { value: 3, label: "Водійське посвідчення" },
 ];
 const years = [
   { label: "1", value: 1 },
