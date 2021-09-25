@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC } from "react";
+import Arrow from "./Arrow";
 
 interface OptionInterface {
   label: string;
@@ -21,12 +22,12 @@ const CustomSelect: FC<CustomSelectProp> = ({
   disabled,
 }: CustomSelectProp): JSX.Element => {
   return (
-    <div className="custom-text-input">
+    <div className="custom-select">
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control,jsx-a11y/label-has-for */}
-      <label className="custom-text-input__label">{label}</label>
-      <div>
+      <label className="custom-select__label">{label}</label>
+      <div className="custom-select__container">
         <select
-          className="custom-text-input__input"
+          className="custom-select__input"
           defaultValue={selectedOption}
           onChange={(e: ChangeEvent<HTMLSelectElement>) => onChange(e)}
           disabled={disabled}
@@ -40,6 +41,7 @@ const CustomSelect: FC<CustomSelectProp> = ({
             </option>
           ))}
         </select>
+        <Arrow />
       </div>
     </div>
   );

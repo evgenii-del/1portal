@@ -1,4 +1,4 @@
-.custom-text-input {
+.custom-select {
   position: relative;
 
   &__label {
@@ -11,6 +11,21 @@
 
     &_error {
       color: #c11d1d;
+    }
+  }
+
+  &__container {
+    position: relative;
+
+    .arrow {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: 17px;
+      right: 17px;
+      transition: .25s all ease;
+      cursor: pointer;
+      pointer-events: none;
     }
   }
 
@@ -40,6 +55,10 @@
     &:disabled {
       border: 1px solid #cecece;
       cursor: default;
+
+      & + .arrow {
+        display: none;
+      }
     }
 
     &_error {
