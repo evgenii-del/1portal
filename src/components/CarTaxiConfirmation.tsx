@@ -7,6 +7,8 @@ const CarTaxiConfirmation: FC = (): JSX.Element => {
         <input
           className="checkbox__input"
           type="checkbox"
+          disabled
+          checked
           name="checkbox_1"
           id="checkbox_1"
         />
