@@ -21,7 +21,7 @@ const CarDetailsStep: FC = (): JSX.Element => {
   const [bodyNumber, setBodyNumber] = useState("");
   const [bodyNumberError, setBodyNumberError] = useState("");
   const insuranceType = 1;
-  const [startDate, setStartDate] = useState(0);
+  const [startDate, setStartDate] = useState("");
 
   const isStateNumberValid = (carNumber: string) => {
     return (
@@ -67,7 +67,7 @@ const CarDetailsStep: FC = (): JSX.Element => {
     }
   };
 
-  const handleStartDate = (e: ChangeEvent<any>) => {
+  const handleStartDate = (e: ChangeEvent<HTMLInputElement>) => {
     setStartDate(e.target.value);
   };
 
