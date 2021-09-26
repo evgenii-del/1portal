@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CustomTextInput from "../Common/CustomTextInput";
 import CustomSelect from "../Common/CustomSelect";
 import CustomTextMask from "../Common/CustomTextMask";
@@ -14,29 +15,40 @@ import {
   seriesAndNumberPassportValidation,
 } from "../../utils/validations";
 import { documentOptions, years } from "../../utils/constants";
+import { updateCustomerDetails } from "../../redux/actions/contract";
 
 const CustomerDetailsStep: FC = (): JSX.Element => {
-  const [firstName, setFirstName] = useState("");
+  const customerDetails = useSelector(
+    (state: any) => state.contractReducer.customerDetails
+  );
+  const {
+    firstName,
+    lastName,
+    parentName,
+    birthdayDate,
+    individualNumber,
+    city,
+    street,
+    house,
+    apartment,
+    phone,
+    email,
+  } = customerDetails;
+  const dispatch = useDispatch();
+
   const [firstNameError, setFirstNameError] = useState("");
-  const [lastName, setLastName] = useState("");
   const [lastNameError, setLastNameError] = useState("");
-  const [parentName, setParentName] = useState("");
   const [parentNameError, setParentNameError] = useState("");
-  const [birthdayDate, setBirthdayDate] = useState("");
   const [birthdayDateError, setBirthdayDateError] = useState("");
-  const [individualNumber, setIndividualNumber] = useState("");
   const [individualNumberError, setIndividualNumberError] = useState("");
-  const [city, setCity] = useState(0);
-  const [street, setStreet] = useState("");
   const [streetError, setStreetError] = useState("");
-  const [house, setHouse] = useState("");
   const [houseError, setHouseError] = useState("");
-  const [apartment, setApartment] = useState("");
   const [apartmentError, setApartmentError] = useState("");
-  const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
-  const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+
+  // DOCUMENTS
+
   const [seriesAndNumberPassport, setSeriesAndNumberPassport] = useState("");
   const [seriesAndNumberPassportError, setSeriesAndNumberPassportError] =
     useState("");
@@ -65,7 +77,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleFirstName = (e: ChangeEvent<HTMLInputElement>) => {
-    setFirstName(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        firstName: e.target.value,
+      })
+    );
     const errorMessage = validateNameValue(e.target.value);
     if (errorMessage && errorMessage.length !== 0) {
       setFirstNameError(errorMessage);
@@ -75,7 +92,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleLastName = (e: ChangeEvent<HTMLInputElement>) => {
-    setLastName(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        lastName: e.target.value,
+      })
+    );
     const errorMessage = validateNameValue(e.target.value);
     if (errorMessage && errorMessage.length !== 0) {
       setLastNameError(errorMessage);
@@ -85,7 +107,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleParentName = (e: ChangeEvent<HTMLInputElement>) => {
-    setParentName(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        parentName: e.target.value,
+      })
+    );
     const errorMessage = validateNameValue(e.target.value);
     if (errorMessage && errorMessage.length !== 0) {
       setParentNameError(errorMessage);
@@ -95,7 +122,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleBirthdayDate = (e: ChangeEvent<HTMLInputElement>) => {
-    setBirthdayDate(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        birthdayDate: e.target.value,
+      })
+    );
     if (!dateValidation(e.target.value)) {
       setBirthdayDateError("Введіть дату в форматі дд.мм.рррр");
     } else {
@@ -104,7 +136,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleIndividualNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    setIndividualNumber(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        individualNumber: e.target.value,
+      })
+    );
     if (e.target.value.replace(/[_]/g, "").length !== 10) {
       setIndividualNumberError("Поле є обов'язковим");
     } else {
@@ -113,11 +150,21 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleCity = (e: ChangeEvent<HTMLSelectElement>) => {
-    setCity(+e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        city: e.target.value,
+      })
+    );
   };
 
   const handleStreet = (e: ChangeEvent<HTMLInputElement>) => {
-    setStreet(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        street: e.target.value,
+      })
+    );
     if (!mandatoryValidation(e.target.value)) {
       setStreetError("Поле є обов'язковим");
     } else {
@@ -126,7 +173,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleHouse = (e: ChangeEvent<HTMLInputElement>) => {
-    setHouse(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        house: e.target.value,
+      })
+    );
     if (!mandatoryValidation(e.target.value)) {
       setHouseError("Поле є обов'язковим");
     } else {
@@ -135,7 +187,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleApartment = (e: ChangeEvent<HTMLInputElement>) => {
-    setApartment(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        apartment: e.target.value,
+      })
+    );
     if (!mandatoryValidation(e.target.value)) {
       setApartmentError("Поле є обов'язковим");
     } else {
@@ -144,7 +201,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handlePhone = (e: ChangeEvent<HTMLInputElement>) => {
-    setPhone(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        phone: e.target.value,
+      })
+    );
     if (!isPhoneValid(e.target.value)) {
       setPhoneError("Поле є обов'язковим");
     } else {
@@ -153,7 +215,12 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    dispatch(
+      updateCustomerDetails({
+        ...customerDetails,
+        email: e.target.value,
+      })
+    );
     if (!isEmailValid(e.target.value)) {
       setEmailError("Поле має містити коректну email адресу");
     } else {
