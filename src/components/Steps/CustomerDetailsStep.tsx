@@ -7,15 +7,12 @@ import {
   dateValidation,
   isEmailValid,
   isPhoneValid,
-  isSeriesDriverValid,
-  isSeriesPassportValid,
   lengthValidation,
   mandatoryValidation,
-  seriesAndNumberDriverValidation,
-  seriesAndNumberPassportValidation,
 } from "../../utils/validations";
-import { documentOptions, years } from "../../utils/constants";
+import { years } from "../../utils/constants";
 import { updateCustomerDetails } from "../../redux/actions/contract";
+import CustomerDocuments from "../CustomerDocuments";
 
 const CustomerDetailsStep: FC = (): JSX.Element => {
   const customerDetails = useSelector(
@@ -46,25 +43,6 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   const [apartmentError, setApartmentError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [emailError, setEmailError] = useState("");
-
-  // DOCUMENTS
-
-  const [seriesAndNumberPassport, setSeriesAndNumberPassport] = useState("");
-  const [seriesAndNumberPassportError, setSeriesAndNumberPassportError] =
-    useState("");
-  const [seriesAndNumberDriver, setSeriesAndNumberDriver] = useState("");
-  const [seriesAndNumberDriverError, setSeriesAndNumberDriverError] =
-    useState("");
-  const [issueDate, setIssueDate] = useState("");
-  const [issueDateError, setIssueDateError] = useState("");
-  const [issuedBy, setIssuedBy] = useState("");
-  const [issuedByError, setIssuedByError] = useState("");
-  const [number, setNumber] = useState("");
-  const [numberError, setNumberError] = useState("");
-  const [record, setRecord] = useState("");
-  const [recordError, setRecordError] = useState("");
-  const [validUntil, setValidUntil] = useState("");
-  const [validUntilError, setValidUntilError] = useState("");
 
   const validateNameValue = (name: string) => {
     let errorMessage = "";
@@ -228,96 +206,6 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
     }
   };
 
-  const handleSeriesAndNumberPassport = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toUpperCase();
-    if (seriesAndNumberPassportValidation(value)) {
-      setSeriesAndNumberPassport(value);
-      if (!isSeriesPassportValid(value)) {
-        setSeriesAndNumberPassportError(
-          "Поле має містити 2 букви кирилиці і 6 цифр"
-        );
-      } else {
-        setSeriesAndNumberPassportError("");
-      }
-    }
-  };
-
-  const handleSeriesAndNumberDriver = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toUpperCase();
-    if (seriesAndNumberDriverValidation(value)) {
-      setSeriesAndNumberDriver(value);
-      if (!isSeriesDriverValid(value)) {
-        setSeriesAndNumberDriverError(
-          "Поле має містити 3 букви кирилиці і 6 цифр"
-        );
-      } else {
-        setSeriesAndNumberDriverError("");
-      }
-    }
-  };
-
-  const handleIssueDate = (e: ChangeEvent<HTMLInputElement>) => {
-    setIssueDate(e.target.value);
-    if (!dateValidation(e.target.value)) {
-      setIssueDateError("Введіть дату в форматі дд.мм.рррр");
-    } else {
-      setIssueDateError("");
-    }
-  };
-
-  const handleIssuedBy = (e: ChangeEvent<HTMLInputElement>) => {
-    setIssuedBy(e.target.value);
-    if (!mandatoryValidation(e.target.value)) {
-      setIssuedByError("Поле є обов'язковим");
-    } else {
-      setIssuedByError("");
-    }
-  };
-
-  const isNumberValid = (numberValue: string) => {
-    return numberValue && numberValue.length === 6;
-  };
-
-  const handleNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    setNumber(e.target.value);
-    if (!isNumberValid(e.target.value)) {
-      setNumberError("Поле є обов'язковим");
-    } else {
-      setIssuedByError("");
-    }
-  };
-
-  const recordValidation = (recordValue: string) => {
-    return recordValue && recordValue.length === 13;
-  };
-
-  const handleRecord = (e: ChangeEvent<HTMLInputElement>) => {
-    setRecord(e.target.value);
-    if (!recordValidation(e.target.value)) {
-      setRecordError("Поле є обов'язковим");
-    } else {
-      setRecordError("");
-    }
-  };
-
-  const handleValidUntil = (e: ChangeEvent<HTMLInputElement>) => {
-    setValidUntil(e.target.value);
-    if (!dateValidation(e.target.value)) {
-      setValidUntilError("Введіть дату в форматі дд.мм.рррр");
-    } else {
-      setValidUntilError("");
-    }
-  };
-
-  const [selectedDocument, setSelectedDocument] = useState(1);
-
-  const handleChangeDocument = (
-    event: ChangeEvent<HTMLSelectElement>
-  ): void => {
-    const documentValue = +event.target.value;
-    setSelectedDocument(documentValue);
-  };
-
   return (
     <>
       <div className="customer-details__info">
@@ -357,7 +245,7 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
             />
             <CustomTextMask
               label="ІПН"
-              placeholder="ІПН"
+              placeholder="__________"
               value={individualNumber}
               onChange={handleIndividualNumber}
               mask="9999999999"
@@ -414,133 +302,7 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <div className="customer-details__documents">
-        {selectedDocument === 1 && (
-          <div className="customer-details__documents-passport">
-            <div className="customer-details__documents-row">
-              <CustomSelect
-                label="Документ"
-                options={documentOptions}
-                selectedOption={selectedDocument}
-                onChange={handleChangeDocument}
-              />
-              <CustomTextInput
-                label="Серія і номер"
-                placeholder="Серія і номер"
-                value={seriesAndNumberPassport}
-                onChange={handleSeriesAndNumberPassport}
-                errorMessage={seriesAndNumberPassportError}
-              />
-              <CustomTextMask
-                label="Дата видачі"
-                placeholder="__.__.____"
-                value={issueDate}
-                onChange={handleIssueDate}
-                mask="99.99.9999"
-                errorMessage={issueDateError}
-              />
-            </div>
-            <div className="customer-details__documents-row">
-              <CustomTextInput
-                label="Ким виданий"
-                placeholder="Ким виданий"
-                value={issuedBy}
-                onChange={handleIssuedBy}
-                errorMessage={issuedByError}
-              />
-            </div>
-          </div>
-        )}
-        {selectedDocument === 2 && (
-          <div className="customer-details__documents-id-card">
-            <div className="customer-details__documents-row">
-              <CustomSelect
-                label="Документ"
-                options={documentOptions}
-                selectedOption={selectedDocument}
-                onChange={handleChangeDocument}
-              />
-              <CustomTextMask
-                label="Номер"
-                placeholder="_________"
-                value={number}
-                onChange={handleNumber}
-                mask="999999999"
-                errorMessage={numberError}
-              />
-              <CustomTextMask
-                label="Запис"
-                placeholder="________-_____"
-                value={record}
-                onChange={handleRecord}
-                mask="99999999-99999"
-                errorMessage={recordError}
-              />
-            </div>
-            <div className="customer-details__documents-row">
-              <CustomTextInput
-                label="Ким видана"
-                placeholder="Ким видана"
-                value={issuedBy}
-                onChange={handleIssuedBy}
-                errorMessage={issuedByError}
-              />
-              <CustomTextMask
-                label="Дата видачі"
-                placeholder="__.__.____"
-                value={issueDate}
-                onChange={handleIssueDate}
-                mask="99.99.9999"
-                errorMessage={issueDateError}
-              />
-            </div>
-          </div>
-        )}
-        {selectedDocument === 3 && (
-          <div className="customer-details__documents-driver-license">
-            <div className="customer-details__documents-row">
-              <CustomSelect
-                label="Документ"
-                options={documentOptions}
-                selectedOption={selectedDocument}
-                onChange={handleChangeDocument}
-              />
-              <CustomTextInput
-                label="Серія і номер"
-                placeholder="Серія і номер"
-                value={seriesAndNumberDriver}
-                onChange={handleSeriesAndNumberDriver}
-                errorMessage={seriesAndNumberDriverError}
-              />
-              <CustomTextMask
-                label="Дата видачі"
-                placeholder="__.__.____"
-                value={issueDate}
-                onChange={handleIssueDate}
-                mask="99.99.9999"
-                errorMessage={issueDateError}
-              />
-            </div>
-            <div className="customer-details__documents-row">
-              <CustomTextInput
-                label="Ким виданий"
-                placeholder="Ким виданий"
-                value={issuedBy}
-                onChange={handleIssuedBy}
-                errorMessage={issuedByError}
-              />
-              <CustomTextMask
-                label="Дійсний до"
-                placeholder="Дійсний до"
-                value={validUntil}
-                onChange={handleValidUntil}
-                mask="99.99.9999"
-                errorMessage={validUntilError}
-              />
-            </div>
-          </div>
-        )}
-      </div>
+      <CustomerDocuments />
     </>
   );
 };

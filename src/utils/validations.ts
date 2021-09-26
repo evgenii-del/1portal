@@ -131,3 +131,9 @@ export const isStateNumberValid = (carNumber: string): boolean => {
     ).test(carNumber)
   );
 };
+
+export const isNumberValid = (numberValue: string): boolean | string =>
+  numberValue && numberValue.length === 6;
+
+export const recordValidation = (recordValue: string): boolean | string =>
+  recordValue && recordValue.length === 13;

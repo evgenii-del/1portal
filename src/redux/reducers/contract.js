@@ -1,4 +1,4 @@
-import { UPDATE_CAR_DETAILS, UPDATE_CUSTOMER_DETAILS } from "../actions/contract";
+import { UPDATE_CAR_DETAILS, UPDATE_CUSTOMER_DETAILS, UPDATE_CUSTOMER_DOCUMENTS } from "../actions/contract";
 
 const initialState = {};
 
@@ -25,6 +25,26 @@ initialState.customerDetails = JSON.parse(localStorage.getItem("customerDetails"
   email: "",
 };
 
+initialState.customerDetails.customerDocuments = JSON.parse(localStorage.getItem("customerDocuments")) ?? {
+  passport: {
+    seriesAndNumber: "",
+    issueDate: "",
+    issuedBy: "",
+  },
+  card: {
+    number: "",
+    record: "",
+    issuedBy: "",
+    issueDate: "",
+  },
+  driver: {
+    seriesAndNumber: "",
+    issueDate: "",
+    issuedBy: "",
+    validUntil: "",
+  }
+};
+
 const contractReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_CAR_DETAILS: {
@@ -40,6 +60,16 @@ const contractReducer = (state = initialState, action) => {
         ...state,
         customerDetails: action.payload,
       };
+    }
+    case UPDATE_CUSTOMER_DOCUMENTS: {
+      localStorage.setItem("customerDocuments", JSON.stringify(action.payload));
+      return {
+        ...state,
+        customerDetails: {
+          ...state.customerDetails,
+          customerDocuments: action.payload
+        }
+      }
     }
     default:
       return state;

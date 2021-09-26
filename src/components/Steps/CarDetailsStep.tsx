@@ -73,13 +73,14 @@ const CarDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleBodyNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toUpperCase();
     dispatch(
       updateCarDetails({
         ...carDetails,
-        bodyNumber: e.target.value,
+        bodyNumber: value,
       })
     );
-    if (!bodyNumberValidation(e.target.value)) {
+    if (!bodyNumberValidation(value)) {
       setBodyNumberError("Поле має містити лише цифри та латинські літери");
     } else {
       setBodyNumberError("");
