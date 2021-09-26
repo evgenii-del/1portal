@@ -1,6 +1,6 @@
-export const GET_BOOKS_STARTED = "GET_BOOKS_STARTED";
+export const UPDATE_CAR_DETAILS = "UPDATE_CAR_DETAILS";
 
-export const getBooksFailure = (error) => ({
-  type: GET_BOOKS_STARTED,
-  payload: error,
+export const updateCarDetails = (data) => ({
+  type: UPDATE_CAR_DETAILS,
+  payload: data,
 });

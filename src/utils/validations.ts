@@ -92,3 +92,17 @@ export const dateValidation = (dateStr: string): boolean => {
   const date = moment(dateStr, "DD.MM.YYYY");
   return date.isValid() && date.year() >= 1930;
 };
+
+export const bodyNumberValidation = (bodyNumberStr: string): boolean =>
+  new RegExp("^[A-Z\\d]{5,17}$").test(bodyNumberStr);
+
+export const isStateNumberValid = (carNumber: string): boolean => {
+  return (
+    new RegExp(
+      /(^([A-Z]){2}([0-9]){4}([A-Z]){2}$)|(^([0-9]){6}([A-Z]){2}$)/
+    ).test(carNumber) ||
+    new RegExp(
+      /(^([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}([0-9]){4}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)|(^([0-9]){6}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)/
+    ).test(carNumber)
+  );
+};

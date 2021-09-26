@@ -1,6 +1,8 @@
 import React, { ChangeEvent, FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Common/Loader";
 import { stateNumberValidation } from "../../utils/validations";
+import { updateCarDetails } from "../../redux/actions/contract";
 
 interface CarNumberStepProp {
   handleNextStep(): void;
@@ -9,8 +11,13 @@ interface CarNumberStepProp {
 const CarNumberStep: FC<CarNumberStepProp> = ({
   handleNextStep,
 }: CarNumberStepProp): JSX.Element => {
+  const carDetails = useSelector(
+    (state: any) => state.contractReducer.carDetails
+  );
+  const { stateNumber } = carDetails;
+  const dispatch = useDispatch();
+
   const [isLoaded, setIsLoaded] = useState(false);
-  const [stateNumber, setStateNumber] = useState("");
 
   const goNextPage = () => {
     setIsLoaded(true);
@@ -23,7 +30,12 @@ const CarNumberStep: FC<CarNumberStepProp> = ({
   const handleStateNumber = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toUpperCase();
     if (stateNumberValidation(value)) {
-      setStateNumber(value);
+      dispatch(
+        updateCarDetails({
+          ...carDetails,
+          stateNumber: value,
+        })
+      );
     }
   };
 
@@ -49,7 +61,7 @@ const CarNumberStep: FC<CarNumberStepProp> = ({
           {isLoaded ? <Loader /> : "Продолжить"}
         </button>
       </div>
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
       <span className="car-number__container-link" onClick={handleNextStep}>
         Рассчитать без номера
       </span>
