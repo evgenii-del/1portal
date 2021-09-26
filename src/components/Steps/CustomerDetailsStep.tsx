@@ -4,20 +4,16 @@ import CustomSelect from "../Common/CustomSelect";
 import CustomTextMask from "../Common/CustomTextMask";
 import {
   dateValidation,
+  isEmailValid,
+  isPhoneValid,
+  isSeriesDriverValid,
+  isSeriesPassportValid,
+  lengthValidation,
   mandatoryValidation,
   seriesAndNumberDriverValidation,
   seriesAndNumberPassportValidation,
 } from "../../utils/validations";
-
-const documentOptions = [
-  { value: 1, label: "Паспорт" },
-  { value: 2, label: "ID Картка" },
-  { value: 3, label: "Водійське посвідчення" },
-];
-const years = [
-  { label: "1", value: 1 },
-  { label: "2", value: 2 },
-];
+import { documentOptions, years } from "../../utils/constants";
 
 const CustomerDetailsStep: FC = (): JSX.Element => {
   const [firstName, setFirstName] = useState("");
@@ -57,13 +53,6 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
   const [recordError, setRecordError] = useState("");
   const [validUntil, setValidUntil] = useState("");
   const [validUntilError, setValidUntilError] = useState("");
-
-  const lengthValidation = (param: string) => {
-    if (param && param.length !== 0) {
-      return true;
-    }
-    return false;
-  };
 
   const validateNameValue = (name: string) => {
     let errorMessage = "";
@@ -154,10 +143,6 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
     }
   };
 
-  const isPhoneValid = (phoneStr: string) => {
-    return phoneStr.replace(/[{()}\s+-._]/g, "").length === 12;
-  };
-
   const handlePhone = (e: ChangeEvent<HTMLInputElement>) => {
     setPhone(e.target.value);
     if (!isPhoneValid(e.target.value)) {
@@ -167,12 +152,6 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
     }
   };
 
-  const isEmailValid = (emailStr: string) => {
-    const re =
-      /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(emailStr.toLowerCase());
-  };
-
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     if (!isEmailValid(e.target.value)) {
@@ -180,13 +159,6 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
     } else {
       setEmailError("");
     }
-  };
-
-  const isSeriesPassportValid = (series: string) => {
-    return (
-      series &&
-      new RegExp(/(^([А-Яа-яІіЇїЄє]){2}([\s])([0-9]){6}$)/).test(series)
-    );
   };
 
   const handleSeriesAndNumberPassport = (e: ChangeEvent<HTMLInputElement>) => {
@@ -201,13 +173,6 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
         setSeriesAndNumberPassportError("");
       }
     }
-  };
-
-  const isSeriesDriverValid = (series: string) => {
-    return (
-      series &&
-      new RegExp(/(^([А-Яа-яІіЇїЄє]){3}([\s])([0-9]){6}$)/).test(series)
-    );
   };
 
   const handleSeriesAndNumberDriver = (e: ChangeEvent<HTMLInputElement>) => {
