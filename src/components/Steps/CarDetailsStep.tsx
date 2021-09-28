@@ -13,6 +13,9 @@ const makeArr = [{ label: "1", value: 1 }];
 const modelArr = [{ label: "1", value: 1 }];
 
 const CarDetailsStep: FC = (): JSX.Element => {
+  const nextDay = new Date(Date.now() + 1000 * 60 * 60 * 24)
+    .toISOString()
+    .split("T")[0];
   const [stateNumber, setStateNumber] = useState("");
   const [stateNumberError, setStateNumberError] = useState("");
   const [selectedYear, setSelectedYear] = useState(0);
@@ -21,7 +24,7 @@ const CarDetailsStep: FC = (): JSX.Element => {
   const [bodyNumber, setBodyNumber] = useState("");
   const [bodyNumberError, setBodyNumberError] = useState("");
   const insuranceType = 1;
-  const [startDate, setStartDate] = useState(0);
+  const [startDate, setStartDate] = useState(nextDay);
 
   const isStateNumberValid = (carNumber: string) => {
     return (
@@ -134,8 +137,10 @@ const CarDetailsStep: FC = (): JSX.Element => {
                 className="custom-text-input__input"
                 type="date"
                 id="startDate"
+                max={nextDay}
                 value={startDate}
                 onChange={handleStartDate}
+                onKeyDown={(e) => e.preventDefault()}
               />
             </div>
           </div>

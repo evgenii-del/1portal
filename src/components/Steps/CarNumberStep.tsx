@@ -36,7 +36,7 @@ const CarNumberStep: FC<CarNumberStepProp> = ({
         <input
           className="car-number__container-input"
           type="text"
-          placeholder="Введите гос. номер"
+          placeholder="Державний номер"
           value={stateNumber}
           onChange={handleStateNumber}
         />
