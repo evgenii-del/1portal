@@ -13,3 +13,31 @@
   min-height: calc(100vh - 120px);
   margin: 0 auto;
 }
+
+.grid {
+  &__title {
+    color: #3c3e44;
+    margin-bottom: 20px;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 1em;
+    margin-bottom: 20px;
+  }
+
+  &__row-address {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1em;
+  }
+}
+
+.documents {
+  background-color: rgba(0, 175, 255, 0.07);
+  border-radius: 4px;
+  padding: 15px 20px;
+}

@@ -22,6 +22,7 @@ const CustomerDocuments: FC = (): JSX.Element => {
   );
   const { passport, card, driver } = customerDetails;
   const dispatch = useDispatch();
+  const [selectedDocument, setSelectedDocument] = useState(1);
 
   // Passport
   const [seriesAndNumberPassportError, setSeriesAndNumberPassportError] =
@@ -250,8 +251,6 @@ const CustomerDocuments: FC = (): JSX.Element => {
     }
   };
 
-  const [selectedDocument, setSelectedDocument] = useState(2);
-
   const handleChangeDocument = (
     event: ChangeEvent<HTMLSelectElement>
   ): void => {
@@ -260,10 +259,10 @@ const CustomerDocuments: FC = (): JSX.Element => {
   };
 
   return (
-    <div className="customer-details__documents">
+    <div className="grid documents">
       {selectedDocument === 1 && (
-        <div className="customer-details__documents-passport">
-          <div className="customer-details__documents-row">
+        <div>
+          <div className="grid__row">
             <CustomSelect
               label="Документ"
               options={documentOptions}
@@ -286,7 +285,7 @@ const CustomerDocuments: FC = (): JSX.Element => {
               errorMessage={issueDatePassportError}
             />
           </div>
-          <div className="customer-details__documents-row">
+          <div className="grid__row">
             <CustomTextInput
               label="Ким виданий"
               placeholder="Ким виданий"
@@ -298,8 +297,8 @@ const CustomerDocuments: FC = (): JSX.Element => {
         </div>
       )}
       {selectedDocument === 2 && (
-        <div className="customer-details__documents-id-card">
-          <div className="customer-details__documents-row">
+        <div>
+          <div className="grid__row">
             <CustomSelect
               label="Документ"
               options={documentOptions}
@@ -323,7 +322,7 @@ const CustomerDocuments: FC = (): JSX.Element => {
               errorMessage={recordCardError}
             />
           </div>
-          <div className="customer-details__documents-row">
+          <div className="grid__row">
             <CustomTextInput
               label="Ким видана"
               placeholder="Ким видана"
@@ -343,8 +342,8 @@ const CustomerDocuments: FC = (): JSX.Element => {
         </div>
       )}
       {selectedDocument === 3 && (
-        <div className="customer-details__documents-driver-license">
-          <div className="customer-details__documents-row">
+        <div>
+          <div className="grid__row">
             <CustomSelect
               label="Документ"
               options={documentOptions}
@@ -367,7 +366,7 @@ const CustomerDocuments: FC = (): JSX.Element => {
               errorMessage={issueDateDriverError}
             />
           </div>
-          <div className="customer-details__documents-row">
+          <div className="grid__row">
             <CustomTextInput
               label="Ким виданий"
               placeholder="Ким виданий"

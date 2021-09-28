@@ -98,10 +98,10 @@ const CarDetailsStep: FC = (): JSX.Element => {
 
   return (
     <>
-      <div className="car-details__car-data">
-        <h2 className="car-details__car-data-title">Данные автомобиля</h2>
-        <div className="car-details__car-data-container">
-          <div className="car-details__car-data-row">
+      <div className="grid">
+        <h2 className="grid__title">Данные автомобиля</h2>
+        <div>
+          <div className="grid__row">
             <CustomTextInput
               label="Державний номер"
               placeholder="Державний номер"
@@ -116,7 +116,7 @@ const CarDetailsStep: FC = (): JSX.Element => {
               onChange={handleSelectedYear}
             />
           </div>
-          <div className="car-details__car-data-row">
+          <div className="grid__row">
             <CustomSelect
               label="Марка"
               selectedOption={make}
@@ -140,9 +140,9 @@ const CarDetailsStep: FC = (): JSX.Element => {
         </div>
       </div>
       <CarTaxiConfirmation />
-      <div className="car-details__period">
-        <h2 className="car-details__period-title">Период действия полиса</h2>
-        <div className="car-details__period-container">
+      <div className="grid">
+        <h2 className="grid__title">Период действия полиса</h2>
+        <div className="grid__row">
           <CustomSelect
             label="Тип страхування"
             options={insuranceTypeArr}

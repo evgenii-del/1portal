@@ -208,10 +208,10 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
 
   return (
     <>
-      <div className="customer-details__info">
-        <h2 className="customer-details__info-title">Данные пользователя</h2>
-        <div className="customer-details__info-container">
-          <div className="customer-details__info-row">
+      <div className="grid">
+        <h2 className="grid__title">Данные пользователя</h2>
+        <div>
+          <div className="grid__row">
             <CustomTextInput
               label="Прізвище"
               placeholder="Прізвище"
@@ -234,7 +234,7 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
               errorMessage={parentNameError}
             />
           </div>
-          <div className="customer-details__info-row">
+          <div className="grid__row">
             <CustomTextMask
               label="Дата народження"
               placeholder="__.__.____"
@@ -252,7 +252,7 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
               errorMessage={individualNumberError}
             />
           </div>
-          <div className="customer-details__info-row">
+          <div className="grid__row">
             <CustomSelect
               label="Місто"
               selectedOption={city}
@@ -266,7 +266,7 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
               onChange={handleStreet}
               errorMessage={streetError}
             />
-            <div className="customer-details__info-address">
+            <div className="grid__row-address">
               <CustomTextInput
                 label="Дім"
                 placeholder="Дім"
@@ -283,7 +283,7 @@ const CustomerDetailsStep: FC = (): JSX.Element => {
               />
             </div>
           </div>
-          <div className="customer-details__info-row">
+          <div className="grid__row">
             <CustomTextMask
               label="Телефон"
               placeholder="+380 (__) ___-__-__"
