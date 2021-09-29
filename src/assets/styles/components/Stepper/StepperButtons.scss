@@ -33,3 +33,14 @@
     color: #fff;
   }
 }
+
+@media (max-width: 480px) {
+  .stepper-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 30px;
+
+    &__continue {
+      grid-column-start: 2;
+    }
+  }
+}
