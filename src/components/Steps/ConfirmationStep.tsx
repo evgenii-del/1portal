@@ -28,16 +28,14 @@ const ConfirmationStep: FC = (): JSX.Element => {
     <>
       <div className="grid">
         <h2 className="grid__title">Данные автомобиля</h2>
-        <div>
-          <div className="grid__row">
-            <ConfirmationItem title="Державний номер" data={stateNumber} />
-            <ConfirmationItem title="Рік випуску" data={selectedYear} />
-          </div>
-          <div className="grid__row">
-            <ConfirmationItem title="Марка" data={make} />
-            <ConfirmationItem title="Модель" data={model} />
-            <ConfirmationItem title="Номер кузова" data={bodyNumber} />
-          </div>
+        <div className="grid__row">
+          <ConfirmationItem title="Державний номер" data={stateNumber} />
+          <ConfirmationItem title="Рік випуску" data={selectedYear} />
+        </div>
+        <div className="grid__row">
+          <ConfirmationItem title="Марка" data={make} />
+          <ConfirmationItem title="Модель" data={model} />
+          <ConfirmationItem title="Номер кузова" data={bodyNumber} />
         </div>
       </div>
       <CarTaxiConfirmation />
@@ -53,28 +51,26 @@ const ConfirmationStep: FC = (): JSX.Element => {
       </div>
       <div className="grid">
         <h2 className="grid__title">Данные пользователя</h2>
-        <div>
-          <div className="grid__row">
-            <ConfirmationItem title="Прізвище" data={firstName} />
-            <ConfirmationItem title="Ім'я" data={lastName} />
-            <ConfirmationItem title="По батькові" data={parentName} />
+        <div className="grid__row">
+          <ConfirmationItem title="Прізвище" data={firstName} />
+          <ConfirmationItem title="Ім'я" data={lastName} />
+          <ConfirmationItem title="По батькові" data={parentName} />
+        </div>
+        <div className="grid__row">
+          <ConfirmationItem title="Дата народження" data={birthdayDate} />
+          <ConfirmationItem title="ІПН" data={individualNumber} />
+        </div>
+        <div className="grid__row">
+          <ConfirmationItem title="Місто" data={city} />
+          <ConfirmationItem title="Вулиця" data={street} />
+          <div className="grid__row-address">
+            <ConfirmationItem title="Дім" data={house} />
+            <ConfirmationItem title="Квартира" data={apartment} />
           </div>
-          <div className="grid__row">
-            <ConfirmationItem title="Дата народження" data={birthdayDate} />
-            <ConfirmationItem title="ІПН" data={individualNumber} />
-          </div>
-          <div className="grid__row">
-            <ConfirmationItem title="Місто" data={city} />
-            <ConfirmationItem title="Вулиця" data={street} />
-            <div className="grid__row-address">
-              <ConfirmationItem title="Дім" data={house} />
-              <ConfirmationItem title="Квартира" data={apartment} />
-            </div>
-          </div>
-          <div className="grid__row">
-            <ConfirmationItem title="Телефон" data={phone} />
-            <ConfirmationItem title="Пошта (email)" data={email} />
-          </div>
+        </div>
+        <div className="grid__row">
+          <ConfirmationItem title="Телефон" data={phone} />
+          <ConfirmationItem title="Пошта (email)" data={email} />
         </div>
       </div>
     </>
