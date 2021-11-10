@@ -92,3 +92,48 @@ export const dateValidation = (dateStr: string): boolean => {
   const date = moment(dateStr, "DD.MM.YYYY");
   return date.isValid() && date.year() >= 1930;
 };
+
+export const bodyNumberValidation = (bodyNumberStr: string): boolean =>
+  new RegExp("^[A-Z\\d]{5,17}$").test(bodyNumberStr);
+
+export const isEmailValid = (emailStr: string): boolean => {
+  const re =
+    /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(emailStr.toLowerCase());
+};
+
+export const isSeriesPassportValid = (series: string): boolean | string => {
+  return (
+    series && new RegExp(/(^([А-Яа-яІіЇїЄє]){2}([\s])([0-9]){6}$)/).test(series)
+  );
+};
+
+export const isSeriesDriverValid = (series: string): boolean | string => {
+  return (
+    series && new RegExp(/(^([А-Яа-яІіЇїЄє]){3}([\s])([0-9]){6}$)/).test(series)
+  );
+};
+
+export const isPhoneValid = (phoneStr: string): boolean => {
+  return phoneStr.replace(/[{()}\s+-._]/g, "").length === 12;
+};
+
+export const lengthValidation = (param: string): boolean =>
+  !!(param && param.length !== 0);
+
+export const isStateNumberValid = (carNumber: string): boolean => {
+  return (
+    new RegExp(
+      /(^([A-Z]){2}([0-9]){4}([A-Z]){2}$)|(^([0-9]){6}([A-Z]){2}$)/
+    ).test(carNumber) ||
+    new RegExp(
+      /(^([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}([0-9]){4}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)|(^([0-9]){6}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)/
+    ).test(carNumber)
+  );
+};
+
+export const isNumberValid = (numberValue: string): boolean | string =>
+  numberValue && numberValue.length === 6;
+
+export const recordValidation = (recordValue: string): boolean | string =>
+  recordValue && recordValue.length === 13;

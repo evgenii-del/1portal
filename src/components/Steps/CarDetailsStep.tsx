@@ -1,46 +1,45 @@
 import React, { ChangeEvent, FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CustomTextInput from "../Common/CustomTextInput";
 import CarTaxiConfirmation from "../CarTaxiConfirmation";
 import CustomSelect from "../Common/CustomSelect";
-import { stateNumberValidation } from "../../utils/validations";
-
-const years = [
-  { label: "1", value: 1 },
-  { label: "2", value: 2 },
-];
-const insuranceTypeArr = [{ label: "1 рік", value: 1 }];
-const makeArr = [{ label: "1", value: 1 }];
-const modelArr = [{ label: "1", value: 1 }];
+import {
+  stateNumberValidation,
+  isStateNumberValid,
+  bodyNumberValidation,
+} from "../../utils/validations";
+import {
+  insuranceTypeArr,
+  makeArr,
+  modelArr,
+  years,
+} from "../../utils/constants";
+import { updateCarDetails } from "../../redux/actions/contract";
 
 const CarDetailsStep: FC = (): JSX.Element => {
+  const carDetails = useSelector(
+    (state: any) => state.contractReducer.carDetails
+  );
+  const { stateNumber, selectedYear, make, model, bodyNumber, startDate } =
+    carDetails;
+  const dispatch = useDispatch();
+
   const nextDay = new Date(Date.now() + 1000 * 60 * 60 * 24)
     .toISOString()
     .split("T")[0];
-  const [stateNumber, setStateNumber] = useState("");
   const [stateNumberError, setStateNumberError] = useState("");
-  const [selectedYear, setSelectedYear] = useState(0);
-  const [make, setMake] = useState(0);
-  const [model, setModel] = useState(0);
-  const [bodyNumber, setBodyNumber] = useState("");
   const [bodyNumberError, setBodyNumberError] = useState("");
   const insuranceType = 1;
-  const [startDate, setStartDate] = useState(nextDay);
-
-  const isStateNumberValid = (carNumber: string) => {
-    return (
-      new RegExp(
-        /(^([A-Z]){2}([0-9]){4}([A-Z]){2}$)|(^([0-9]){6}([A-Z]){2}$)/
-      ).test(carNumber) ||
-      new RegExp(
-        /(^([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}([0-9]){4}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)|(^([0-9]){6}([ABKEHIXPOCMTАВКЕНІХРОСМТ]){2}$)/
-      ).test(carNumber)
-    );
-  };
 
   const handleStateNumber = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toUpperCase();
     if (stateNumberValidation(value)) {
-      setStateNumber(value);
+      dispatch(
+        updateCarDetails({
+          ...carDetails,
+          stateNumber: value,
+        })
+      );
       if (!isStateNumberValid(value)) {
         setStateNumberError("В форматі XX0000XX або 000000XX");
       } else {
@@ -50,28 +49,54 @@ const CarDetailsStep: FC = (): JSX.Element => {
   };
 
   const handleSelectedYear = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedYear(+e.target.value);
+    dispatch(
+      updateCarDetails({
+        ...carDetails,
+        selectedYear: +e.target.value,
+      })
+    );
   };
 
   const handleMake = (e: ChangeEvent<HTMLSelectElement>) => {
-    setMake(+e.target.value);
+    dispatch(
+      updateCarDetails({
+        ...carDetails,
+        make: +e.target.value,
+      })
+    );
   };
 
   const handleModel = (e: ChangeEvent<HTMLSelectElement>) => {
-    setModel(+e.target.value);
+    dispatch(
+      updateCarDetails({
+        ...carDetails,
+        model: +e.target.value,
+      })
+    );
   };
 
   const handleBodyNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    setBodyNumber(e.target.value);
-    if (!new RegExp("^[A-Z\\d]{5,17}$").test(e.target.value)) {
+    const value = e.target.value.toUpperCase();
+    dispatch(
+      updateCarDetails({
+        ...carDetails,
+        bodyNumber: value,
+      })
+    );
+    if (!bodyNumberValidation(value)) {
       setBodyNumberError("Поле має містити лише цифри та латинські літери");
     } else {
       setBodyNumberError("");
     }
   };
 
-  const handleStartDate = (e: ChangeEvent<any>) => {
-    setStartDate(e.target.value);
+  const handleStartDate = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      updateCarDetails({
+        ...carDetails,
+        startDate: e.target.value,
+      })
+    );
   };
 
   return (
