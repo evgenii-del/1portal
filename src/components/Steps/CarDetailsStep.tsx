@@ -101,51 +101,49 @@ const CarDetailsStep: FC = (): JSX.Element => {
 
   return (
     <>
-      <div className="car-details__car-data">
-        <h2 className="car-details__car-data-title">Данные автомобиля</h2>
-        <div className="car-details__car-data-container">
-          <div className="car-details__car-data-row">
-            <CustomTextInput
-              label="Державний номер"
-              placeholder="Державний номер"
-              value={stateNumber}
-              onChange={handleStateNumber}
-              errorMessage={stateNumberError}
-            />
-            <CustomSelect
-              label="Рік випуску"
-              selectedOption={selectedYear}
-              options={years}
-              onChange={handleSelectedYear}
-            />
-          </div>
-          <div className="car-details__car-data-row">
-            <CustomSelect
-              label="Марка"
-              selectedOption={make}
-              options={makeArr}
-              onChange={handleMake}
-            />
-            <CustomSelect
-              label="Модель"
-              selectedOption={model}
-              options={modelArr}
-              onChange={handleModel}
-            />
-            <CustomTextInput
-              label="Номер кузова"
-              placeholder="Номер кузова"
-              value={bodyNumber}
-              onChange={handleBodyNumber}
-              errorMessage={bodyNumberError}
-            />
-          </div>
+      <div className="grid">
+        <h2 className="grid__title">Данные автомобиля</h2>
+        <div className="grid__row">
+          <CustomTextInput
+            label="Державний номер"
+            placeholder="Державний номер"
+            value={stateNumber}
+            onChange={handleStateNumber}
+            errorMessage={stateNumberError}
+          />
+          <CustomSelect
+            label="Рік випуску"
+            selectedOption={selectedYear}
+            options={years}
+            onChange={handleSelectedYear}
+          />
+        </div>
+        <div className="grid__row">
+          <CustomSelect
+            label="Марка"
+            selectedOption={make}
+            options={makeArr}
+            onChange={handleMake}
+          />
+          <CustomSelect
+            label="Модель"
+            selectedOption={model}
+            options={modelArr}
+            onChange={handleModel}
+          />
+          <CustomTextInput
+            label="Номер кузова"
+            placeholder="Номер кузова"
+            value={bodyNumber}
+            onChange={handleBodyNumber}
+            errorMessage={bodyNumberError}
+          />
         </div>
       </div>
       <CarTaxiConfirmation />
-      <div className="car-details__period">
-        <h2 className="car-details__period-title">Период действия полиса</h2>
-        <div className="car-details__period-container">
+      <div className="grid">
+        <h2 className="grid__title">Период действия полиса</h2>
+        <div className="grid__row">
           <CustomSelect
             label="Тип страхування"
             options={insuranceTypeArr}

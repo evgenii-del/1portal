@@ -1,5 +1,40 @@
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
   height: 60px;
   background-color: #fff;
   border-bottom: solid 1px #dddede;
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__list-item + .header__list-item {
+    padding-left: 25px;
+  }
+
+  &__list-item-link {
+    color: #333333;
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      display: none;
+      width: 100%;
+      height: 2px;
+      background: #333333;
+      bottom: -5px;
+      right: 0;
+    }
+
+    &:hover {
+      &::after {
+        display: block;
+      }
+    }
+  }
 }
